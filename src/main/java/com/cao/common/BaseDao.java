@@ -154,7 +154,7 @@ public class BaseDao<T> {
 
         for (Field field : fields) {
 
-            if (this.TABLE_NAME_FIELD.equals(field.getName())) {
+            if (this.TABLE_NAME_FIELD.equals(field.getName()) || field.getName().startsWith("E_")) {
                 continue;
             }
 
@@ -241,7 +241,7 @@ public class BaseDao<T> {
             int index = 0;    //自定义一个值的数组下标，为了防止一下循环中continue情况的产生
             for (int i = 0; i < myFields.length; i++) {
                 Field myField = myFields[i];
-                if (this.TABLE_NAME_FIELD.equals(myField.getName())) {
+                if (this.TABLE_NAME_FIELD.equals(myField.getName()) || myField.getName().startsWith("E_")) {
                     continue;
                 }
 
@@ -296,7 +296,7 @@ public class BaseDao<T> {
 
         for (Field field : fields) {
 
-            if (this.TABLE_NAME_FIELD.equals(field.getName())) {
+            if (this.TABLE_NAME_FIELD.equals(field.getName()) || field.getName().startsWith("E_")) {
                 continue;
             }
 
@@ -362,7 +362,7 @@ public class BaseDao<T> {
             int index = 0;    //自定义一个值的数组下标，为了防止以下循环中continue情况的产生
             for (int i = 0; i < myFields.length; i++) {
                 Field myField = myFields[i];
-                if (this.TABLE_NAME_FIELD.equals(myField.getName())) {
+                if (this.TABLE_NAME_FIELD.equals(myField.getName()) || myField.getName().startsWith("E_")) {
                     continue;
                 }
 

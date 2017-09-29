@@ -23,14 +23,14 @@
         <form class="am-form am-form-horizontal am-g-collapse">
           <div class="am-form-group">
             <label class="am-u-md-2 am-form-label">maxage：</label>
-            <div class="am-u-md-10">
+            <div class="am-u-md-10 am-animation-slide-top">
               <input type="text" value="100" id="maxAge">
             </div>
           </div>
           <div class="am-form-group">
             <label class="am-u-md-2 am-form-label">轮询时间（毫秒）：</label>
-            <div class="am-u-md-10" id="preValueDiv">
-              <div class="am-btn-group am-margin-bottom am-btn-group-justify" shy-data="interBtnList">
+            <div class="am-u-md-10 am-animation-slide-top" id="preValueDiv">
+              <div class="am-btn-group am-margin-bottom am-btn-group-justify" id="interBtnList">
                 <a type="button" class="am-btn am-btn-default" onclick="selectTime(this)">
                   100
                 </a>
@@ -42,28 +42,25 @@
                 <a type="button" class="am-btn am-btn-default" onclick="selectTime(this)">700</a>
                 <a type="button" class="am-btn am-btn-default" onclick="selectTime(this)">800</a>
                 <a type="button" class="am-btn am-btn-default" onclick="selectTime(this)">900</a>
-                <a type="button" class="am-btn am-btn-default am-active" onclick="selectTime(this)">1000</a>
+                <a type="button" class="am-btn am-btn-default" onclick="selectTime(this)">1000</a>
                 <a type="button" class="am-btn am-btn-default" onclick="showCustomDiv(this)">自定义</a>
               </div>
             </div>
 
-            <div class="am-input-group am-u-md-10 am-hide" id="customTimeDiv">
+            <div class="am-input-group am-u-md-10 am-animation-slide-top am-hide" id="customTimeDiv">
               <input type="text" class="am-form-field">
-              <a class="am-input-group-label" href="javascript:showPreValueDiv()">返回</a>
+              <a class="am-input-group-label am-btn am-btn-default" href="javascript:showPreValueDiv()">返回</a>
             </div>
-
           </div>
           <div class="am-form-group">
             <div class="am-u-md-5 am-u-md-offset-2">
               <button type="button" class="am-btn am-btn-primary" onclick="adjustQuartzTime()">确定</button>
             </div>
             <div class="am-u-md-5">
-              <button type="button" class="am-btn am-btn-default am-fr" id="parseBtn" onclick="pauseQuartz()">暂停</button>
-              <button type="button" class="am-btn am-btn-success am-fr am-hide" id="startBtn" onclick="startQuartz()">开始</button>
+              <button type="button" class="am-btn am-btn-default am-fr am-animation-fade" id="pauseBtn" onclick="pauseQuartz()">暂停</button>
+              <button type="button" class="am-btn am-btn-success am-fr am-hide am-animation-fade" id="startBtn" onclick="resumeQuartz()">开始</button>
             </div>
           </div>
-
-
         </form>
       </div>
     </div>

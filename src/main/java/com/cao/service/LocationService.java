@@ -7,8 +7,6 @@ import com.cao.model.QuartzModel;
 import com.cao.util.GsonUtils;
 import com.cao.util.HttpUtils;
 import org.quartz.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
@@ -41,9 +39,9 @@ public class LocationService {
      */
     public void syncLocationData(int maxAge) throws Exception {
         //调用http接口，获取数据
-//        String url = "http://192.168.123.124:8080/qpe/getHAIPLocation?maxAge=" + maxAge;
+        String url = "http://192.168.123.124:8080/qpe/getHAIPLocation?maxAge=" + maxAge;
 
-        String url = "http://localhost:8080/static/testData.txt";
+//        String url = "http://localhost:8080/static/testData.txt";
         String responseStr = HttpUtils.httpGet(url);
 
         List<Map<String, Object>> responseMap = GsonUtils.fromJson(responseStr, List.class);
@@ -122,6 +120,30 @@ public class LocationService {
         QuartzModel quartzModel = this.quartzService.queryRecord();
         quartzModel.setMaxAge(maxAge);
         quartzModel.setTime(time);
+        this.quartzService.updateOne(quartzModel);
+    }
+
+    /**
+     * 暂停任务
+     */
+    public void pauseQuartz() throws Exception {
+        this.myScheduler.getScheduler().pauseAll();
+
+        //把定时器参数入库
+        QuartzModel quartzModel = this.quartzService.queryRecord();
+        quartzModel.setStatus(QuartzModel.E_STATUS_PAUSE);
+        this.quartzService.updateOne(quartzModel);
+    }
+
+    /**
+     * 暂停任务
+     */
+    public void resumeQuartz() throws Exception {
+        this.myScheduler.getScheduler().resumeAll();
+
+        //把定时器参数入库
+        QuartzModel quartzModel = this.quartzService.queryRecord();
+        quartzModel.setStatus(QuartzModel.E_STATUS_RUNNING);
         this.quartzService.updateOne(quartzModel);
     }
 }

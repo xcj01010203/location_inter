@@ -23,7 +23,17 @@ function adjustQuartzTime() {
     alert("请填写maxAge");
     return;
   }
-  var interTime = $("div[shy-data=interBtnList]").find("a.am-active").text();
+  var interTime = null;
+  if (!$("#preValueDiv").hasClass("am-hide")) {
+    interTime = $("#interBtnList").find("a.am-active").text();
+  }
+  if (!$("#customTimeDiv").hasClass("am-hide")) {
+    interTime = $("#customTimeDiv").find("input").val();
+  }
+  if (!interTime) {
+    alert("请选择或填写轮询时间");
+    return;
+  }
 
   $.ajax({
     url: "/location/adjustQuartzTime",
@@ -83,13 +93,35 @@ function loadQuartz() {
 
       var time = response.time;
       var maxAge = response.maxAge;
+      var status = response.status;
 
       $("#maxAge").val(maxAge);
-      $.each($("div[shy-data=interBtnList]").find("a"), function (index, item) {
+
+      //时间间隔的初始化
+      var matchPreValue = false;
+      $.each($("#interBtnList").find("a"), function (index, item) {
         if ($(this).text() == time) {
           $(this).click();
+          matchPreValue = true;
         }
-      })
+      });
+      if (!matchPreValue) {
+        $("#customTimeDiv").find("input").val(time);
+        $("#customTimeDiv").removeClass("am-hide");
+        $("#preValueDiv").addClass("am-hide");
+      }
+
+
+
+      //开始暂停按钮的初始化
+      if (status == 1) {
+        $("#pauseBtn").removeClass("am-hide");
+        $("#startBtn").addClass("am-hide");
+      } else {
+        $("#pauseBtn").addClass("am-hide");
+        $("#startBtn").removeClass("am-hide");
+      }
+
     }
   })
 }
@@ -99,7 +131,7 @@ function loadQuartz() {
  * @param _this
  */
 function showCustomDiv(_this) {
-  selectTime(_this);
+  // selectTime(_this);
 
   $("#preValueDiv").addClass("am-hide");
   $("#customTimeDiv").removeClass("am-hide");
@@ -118,12 +150,38 @@ function showPreValueDiv() {
  * 暂停任务
  */
 function pauseQuartz() {
-  
+  $.ajax({
+    url: "/location/pauseQuartz",
+    type: "post",
+    dataType: "json",
+    success: function (response) {
+      if (!response.success) {
+        alert(response.message);
+        return;
+      }
+
+      $("#startBtn").removeClass("am-hide");
+      $("#pauseBtn").addClass("am-hide")
+    }
+  });
 }
 
 /**
  * 开始任务
  */
-function startQuartz() {
+function resumeQuartz() {
+  $.ajax({
+    url: "/location/resumeQuartz",
+    type: "post",
+    dataType: "json",
+    success: function (response) {
+      if (!response.success) {
+        alert(response.message);
+        return;
+      }
 
+      $("#startBtn").addClass("am-hide");
+      $("#pauseBtn").removeClass("am-hide")
+    }
+  });
 }

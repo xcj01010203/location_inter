@@ -112,6 +112,58 @@ public class LocationController {
     }
 
     /**
+     * 暂停任务
+     * @param time
+     * @param maxAge
+     * @return
+     */
+    @RequestMapping("/pauseQuartz")
+    public Map<String, Object> pauseQuartz(Integer time, Integer maxAge) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+
+        boolean success = true;
+        String message = "";
+        try {
+            this.locationService.pauseQuartz();
+
+        } catch (Exception e) {
+            success = false;
+            message = "出现错误";
+            logger.error("出现错误", e);
+        }
+
+        resultMap.put("success", success);
+        resultMap.put("message", message);
+        return resultMap;
+    }
+
+    /**
+     * 重新启动任务
+     * @param time
+     * @param maxAge
+     * @return
+     */
+    @RequestMapping("/resumeQuartz")
+    public Map<String, Object> resumeQuartz(Integer time, Integer maxAge) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+
+        boolean success = true;
+        String message = "";
+        try {
+            this.locationService.resumeQuartz();
+
+        } catch (Exception e) {
+            success = false;
+            message = "出现错误";
+            logger.error("出现错误", e);
+        }
+
+        resultMap.put("success", success);
+        resultMap.put("message", message);
+        return resultMap;
+    }
+
+    /**
      * 查询定时器信息
      * @return
      */
@@ -125,6 +177,7 @@ public class LocationController {
             QuartzModel quartzModel = this.quartzService.queryRecord();
             resultMap.put("time", quartzModel.getTime());
             resultMap.put("maxAge", quartzModel.getMaxAge());
+            resultMap.put("status", quartzModel.getStatus());
         } catch (Exception e) {
             success = false;
             message = "出现错误";
