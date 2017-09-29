@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!--<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="group" value="job_work"/>-->
+    <!--<property name="name" value="job_work_name"/>-->
+    <!--&lt;!&ndash;false表示等上一个任务执行完后再开启新的任务&ndash;&gt;-->
+    <!--<property name="concurrent" value="false"/>-->
+    <!--<property name="targetObject" ref="locationController" />-->
+    <!--<property name="targetMethod" value="test" />-->
+    <!--</bean>-->
+
+    <bean id="params" class="org.quartz.JobDataMap">
+        <constructor-arg>
+            <map>
+                <entry key="maxAge" value="100"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.cao.controller.JobController"/>
+        <property name="jobDataMap" ref="params"/>
+    </bean>
+
+    <!--  调度触发器 -->
+    <bean id="myTrigger"
+          class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail"/>
+        <property name="startDelay" value="0"/>
+        <property name="repeatInterval" value="1000"/>
+    </bean>
+
+    <!--调度工厂-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="myTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>

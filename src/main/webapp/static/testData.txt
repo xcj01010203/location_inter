@@ -1,0 +1,53 @@
+[
+  {
+    "responseTimestampEpoch": 1506253715627,
+    "positionY": 3.1709966631556026,
+    "positionZ": 0.5,
+    "smoothedPositionZ": 0.5,
+    "smoothedPositionY": 3.116898478224702,
+    "smoothedPositionX": -1.2144113193610329,
+    "areaId": "Tracking005",
+    "positionAccuracy": 0.38667384962728035,
+    "version": "1.1",
+    "id": "c4edba4be200",
+    "areaName": "11",
+    "color": "#FF0000",
+    "positionX": -1.1545924914686678,
+    "positionTimestampEpoch": 1506253714435,
+    "positionTimestamp": "Sun Sep 24 19:48:34 CST 2017"
+  },
+  {
+    "responseTimestampEpoch": 1506253715628,
+    "positionY": 2.0541159389214387,
+    "positionZ": 0.5,
+    "smoothedPositionZ": 0.5,
+    "smoothedPositionY": 2.0903560758438564,
+    "smoothedPositionX": -1.2524300663060235,
+    "areaId": "Tracking005",
+    "positionAccuracy": 0.3686950358861111,
+    "version": "1.1",
+    "id": "c4edba4d565a",
+    "areaName": "11",
+    "color": "#FF0000",
+    "positionX": -1.220593035816584,
+    "positionTimestampEpoch": 1506253714398,
+    "positionTimestamp": "Sun Sep 24 19:48:34 CST 2017"
+  },
+  {
+    "responseTimestampEpoch": 1506253715628,
+    "positionY": 3.7443850843655917,
+    "positionZ": 0.5,
+    "smoothedPositionZ": 0.5,
+    "smoothedPositionY": 3.7652105676004783,
+    "smoothedPositionX": -1.742656765480557,
+    "areaId": "Tracking005",
+    "positionAccuracy": 0.42360173161247017,
+    "version": "1.1",
+    "id": "c4edba4da29e",
+    "areaName": "11",
+    "color": "#FF0000",
+    "positionX": -1.648417218082544,
+    "positionTimestampEpoch": 1506253714430,
+    "positionTimestamp": "Sun Sep 24 19:48:34 CST 2017"
+  }
+]
