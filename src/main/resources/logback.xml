@@ -20,8 +20,6 @@
         </encoder>
     </appender>
 
-    <root level="debug">
-    </root>
     <root level="error">
         <appender-ref ref="stdout" />
         <appender-ref ref="file" />

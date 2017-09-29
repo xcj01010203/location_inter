@@ -23,11 +23,7 @@ public class JobController extends QuartzJobBean {
             JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
             int maxAge = jobDataMap.getInt("maxAge");
 
-            logger.error("=============" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss | SSS").format(new Date()));
-
             LocationService locationService = ApplicationContextUtil.getBeanDetail("locationService");
-
-//            LocationService locationService = (LocationService) new FileSystemXmlApplicationContext("classpath:spring-context.xml").getBean("locationService");
             locationService.syncLocationData(maxAge);
         } catch (Exception e) {
             logger.error("定时获取坐标失败", e);
